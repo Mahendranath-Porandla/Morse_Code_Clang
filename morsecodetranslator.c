@@ -166,7 +166,7 @@ const char *englishToMorse(char c)
 
 char morseToEnglish(const char *morsem)
 {
-    // Search the Morse code lookup table for a match
+    // Search the Morse Code lookup table for a match
     int num_chars = sizeof(morse_table) / sizeof(morse_table[0]);
     for (int i = 0; i < num_chars; i++)
     {
