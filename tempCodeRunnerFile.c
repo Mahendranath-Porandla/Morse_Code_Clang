@@ -166,10 +166,6 @@ const char *englishToMorse(char c)
 
 char morseToEnglish(const char *morsem)
 {
-    if (strcmp(morsem, "/") == 0)
-    {
-        return ' '; // Return space for "/"
-    }
     // Search the Morse Code lookup table for a match
     int num_chars = sizeof(morse_table) / sizeof(morse_table[0]);
     for (int i = 0; i < num_chars; i++)
