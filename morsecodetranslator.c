@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 static const char *morse_table[] = {
     ".-",    // A Index = 0
@@ -48,16 +49,25 @@ char morseToEnglish(const char *);
 int main()
 {
     int choice;
-    char input[100];
+    char *input;
+    input = (char *)malloc(100 * sizeof(*input));
+    if (input == NULL)
+    {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
     char c;
-    const char *word;
+
+    char *word;
+    word = (char *)malloc(sizeof(*word));
 
     printf("Enter 1 to convert English to Morse.\nEnter 2 to convert Morse to English.\n");
     scanf("%d", &choice);
 
     printf("Enter text to convert: ");
     getchar(); // consume newline character from scanf
-    fgets(input, sizeof(input), stdin);
+    fgets(input, 100, stdin);
     input[strcspn(input, "\n")] = '\0'; // remove trailing newline character
 
     switch (choice)
@@ -72,6 +82,7 @@ int main()
             printf("%s ", morse);
         }
         printf("\n");
+        free(input);
 
         return 0;
         break;
@@ -92,6 +103,8 @@ int main()
             word = strtok(NULL, " ");
         }
         printf("\n");
+        free(input);
+        free(word);
 
         return 0;
         break;
