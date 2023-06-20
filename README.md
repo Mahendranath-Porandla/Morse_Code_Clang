@@ -1,45 +1,7 @@
-usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]
-           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
-           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
-           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
-           [--config-env=<name>=<envvar>] <command> [<args>]
-
-These are common Git commands used in various situations:
-
-start a working area (see also: git help tutorial)
-   clone     Clone a repository into a new directory
-   init      Create an empty Git repository or reinitialize an existing one
-
-work on the current change (see also: git help everyday)
-   add       Add file contents to the index
-   mv        Move or rename a file, a directory, or a symlink
-   restore   Restore working tree files
-   rm        Remove files from the working tree and from the index
-
-examine the history and state (see also: git help revisions)
-   bisect    Use binary search to find the commit that introduced a bug
-   diff      Show changes between commits, commit and working tree, etc
-   grep      Print lines matching a pattern
-   log       Show commit logs
-   show      Show various types of objects
-   status    Show the working tree status
-
-grow, mark and tweak your common history
-   branch    List, create, or delete branches
-   commit    Record changes to the repository
-   merge     Join two or more development histories together
-   rebase    Reapply commits on top of another base tip
-   reset     Reset current HEAD to the specified state
-   switch    Switch branches
-   tag       Create, list, delete or verify a tag object signed with GPG
-
-collaborate (see also: git help workflows)
-   fetch     Download objects and refs from another repository
-   pull      Fetch from and integrate with another repository or a local branch
-   push      Update remote refs along with associated objects
-
-'git help -a' and 'git help -g' list available subcommands and some
-concept guides. See 'git help <command>' or 'git help <concept>'
-to read about a specific subcommand or concept.
-See 'git help git' for an overview of the system.
-
+This project is a simple implementation of English to Morse code and Morse code to English conversion using C programming language. The program takes user input in the form of English words or Morse code and converts it into the other form based on the user's choice.
+The program starts by defining a static array of strings that holds the Morse code representations for English alphabets and numbers. It then defines two functions, englishToMorse() and morseToEnglish(), that convert English letters/numbers and Morse code respectively.
+The englishToMorse() function takes an English letter/number as input and returns its Morse code representation based on a lookup in the morse_table. The function also handles special characters such as space, dot, comma, etc., and returns their corresponding Morse code.
+The morseToEnglish() function takes a Morse code string as input and returns its corresponding English letter/number based on a search in the morse_table.
+The main function reads user input and calls the appropriate function based on the user's choice. If the user chooses to convert English to Morse code, the program iterates over each character in the input and calls englishToMorse() to get its Morse code representation. The program then prints the Morse code output to the console.
+If the user chooses to convert Morse code to English, the program splits the input into individual Morse code words and calls morseToEnglish() to get the corresponding English letter/number. The program then prints the English output to the console.
+Overall, the project is a good example of using lookup tables and string manipulation in C programming. It can be further improved by adding additional features such as audio output of Morse code or graphical user interface for ease of use.
