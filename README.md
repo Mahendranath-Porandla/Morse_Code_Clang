@@ -12,3 +12,4 @@ The morseToEnglish() function takes a Morse code string as input and returns its
 The main function reads user input and calls the appropriate function based on the user's choice. If the user chooses to convert English to Morse code, the program iterates over each character in the input and calls englishToMorse() to get its Morse code representation. The program then prints the Morse code output to the console.
 If the user chooses to convert Morse code to English, the program splits the input into individual Morse code words and calls morseToEnglish() to get the corresponding English letter/number. The program then prints the English output to the console.
 Overall, the project is a good example of using lookup tables and string manipulation in C programming. It can be further improved by adding additional features such as audio output of Morse code or graphical user interface for ease of use.
+
