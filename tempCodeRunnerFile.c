@@ -49,24 +49,23 @@ int main()
 {
     int choice;
     char input[100];
-    int len;
-    int inputLength;
+    char c;
     const char *word;
 
-    printf("Enter 1 to convert English to Morse\nEnter 2 to convert Morse to English\n");
+    printf("Enter 1 to convert English to Morse.\nEnter 2 to convert Morse to English.\n");
     scanf("%d", &choice);
 
+    printf("Enter text to convert: ");
     getchar(); // consume newline character from scanf
-
-    printf("Enter Morse code: ");
     fgets(input, sizeof(input), stdin);
     input[strcspn(input, "\n")] = '\0'; // remove trailing newline character
 
     switch (choice)
     {
     case 1:
+        englishToMorse(c);
         // Convert each character to Morse code
-        len = strlen(input);
+        int len = strlen(input);
         for (int i = 0; i < len; i++)
         {
             const char *morse = englishToMorse(input[i]);
@@ -96,6 +95,7 @@ int main()
 
         return 0;
         break;
+
     default:
         printf("Invalid choice!\n");
         break;
@@ -166,21 +166,14 @@ const char *englishToMorse(char c)
 
 char morseToEnglish(const char *morsem)
 {
-    // Search the Morse code lookup table for a match
+    // Search the Morse Code lookup table for a match
     int num_chars = sizeof(morse_table) / sizeof(morse_table[0]);
     for (int i = 0; i < num_chars; i++)
     {
         if (strcmp(morsem, morse_table[i]) == 0)
         {
             // Return the corresponding English character
-            if (i >= 0 && i <= 25) // A-Z
-            {
-                return (char)('A' + i);
-            }
-            else if (i >= 26 && i <= 35) // 0-9
-            {
-                return (char)('0' + i - 26);
-            }
+            return (char)'A' + i;
         }
     }
 
