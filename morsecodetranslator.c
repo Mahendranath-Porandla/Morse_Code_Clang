@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-static const char *morse_table[] = {
+static char *morse_table[] = {
     ".-",    // A Index = 0
     "-...",  // B Index = 1
     "-.-.",  // C Index = 2
@@ -42,9 +42,9 @@ static const char *morse_table[] = {
 
 };
 
-const char *englishToMorse(char);
+char *englishToMorse(char);
 
-char morseToEnglish(const char *);
+char morseToEnglish( char *);
 
 int main()
 {
@@ -79,7 +79,7 @@ int main()
         len = strlen(input);
         for (int i = 0; i < len; i++)
         {
-            const char *morse = englishToMorse(input[i]);
+             char *morse = englishToMorse(input[i]);
             printf("%s ", morse);
         }
         printf("\n");
@@ -98,6 +98,7 @@ int main()
             {
                 printf("%c", cm);
             }
+          
 
             // Move to the next word
             word = strtok(NULL, " ");
@@ -118,7 +119,7 @@ int main()
     return 0;
 }
 
-const char *englishToMorse(char c)
+char *englishToMorse(char c)
 {
     if (c >= 'A' && c <= 'Z')
     {
@@ -178,7 +179,7 @@ const char *englishToMorse(char c)
     }
 }
 
-char morseToEnglish(const char *morsem)
+char morseToEnglish( char *morsem)
 {
     if (strcmp(morsem, "/") == 0)
     {
@@ -186,13 +187,23 @@ char morseToEnglish(const char *morsem)
     }
     // Search the Morse Code lookup table for a match
     int num_chars = sizeof(morse_table) / sizeof(morse_table[0]);
+
     for (int i = 0; i < num_chars; i++)
     {
-        if (strcmp(morsem, morse_table[i]) == 0)
+         if (strcmp(morsem, morse_table[i]) == 0)
         {
-            // Return the corresponding English character
-            return (char)'A' + i;
-        }
+        //     // Return the corresponding English character
+        //     return (char)'A' + i;
+        // }
+        if (i >= 0 && i <= 25) {
+                return (char)('A' + i);
+                //break;
+
+            } 
+            else if (i >= 26 && i <= 35) {
+                return (char)(morse_table['0' + i - 26]);
+            }
+    }
     }
 
     // No match found
