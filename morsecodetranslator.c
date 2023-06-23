@@ -201,7 +201,7 @@ char morseToEnglish( char *morsem)
 
             } 
             else if (i >= 26 && i <= 35) {
-                return (char)(morse_table['0' + i - 26]);
+                return (char)('0' + i - 26);
             }
     }
     }
