@@ -50,6 +50,7 @@ int main()
 {
     int choice;
     char *input;
+    int len;
     input = (char *)malloc(100 * sizeof(*input));
     if (input == NULL)
     {
@@ -64,25 +65,24 @@ int main()
 
     printf("Enter 1 to convert English to Morse.\nEnter 2 to convert Morse to English.\n");
     scanf("%d", &choice);
-
+    
     printf("Enter text to convert: ");
     getchar(); // consume newline character from scanf
     fgets(input, 100, stdin);
-    input[strcspn(input, "\n")] = '\0'; // remove trailing newline character
+  //  input[strcspn(input, "\n")] = '\0'; // remove trailing newline character
 
     switch (choice)
     {
     case 1:
-        englishToMorse(c);
+        //englishToMorse(c);
         // Convert each character to Morse code
-        int len = strlen(input);
+        len = strlen(input);
         for (int i = 0; i < len; i++)
         {
             const char *morse = englishToMorse(input[i]);
             printf("%s ", morse);
         }
         printf("\n");
-        free(input);
 
         return 0;
         break;
@@ -103,8 +103,7 @@ int main()
             word = strtok(NULL, " ");
         }
         printf("\n");
-        free(input);
-        free(word);
+       
 
         return 0;
         break;
@@ -113,6 +112,8 @@ int main()
         printf("Invalid choice!\n");
         break;
     }
+     free(input);
+        free(word);
 
     return 0;
 }
