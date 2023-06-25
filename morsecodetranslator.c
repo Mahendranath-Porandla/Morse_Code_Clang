@@ -67,6 +67,7 @@ int main()
     printf("Enter text to convert: ");
     getchar(); // consume newline character from scanf
     fgets(input, 100, stdin);
+    input[strcspn(input, "\n")] = '\0';
 
     switch (choice)
     {
