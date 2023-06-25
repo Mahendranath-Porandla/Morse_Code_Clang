@@ -8,7 +8,6 @@ typedef struct
     char english;
 } MorseMapping;
 
-
 MorseMapping morse_table[] = {
     {".-", 'A'},      // A Index = 0
     {"-...", 'B'},    // B Index = 1
@@ -18,7 +17,7 @@ MorseMapping morse_table[] = {
     {"..-.", 'F'},    // F Index = 5
     {"--.", 'G'},     // G Index = 6
     {"....", 'H'},    // H Index = 7
-    {"..", 'I'},      // I Index = 8
+    {"..", 'I'},      // I Index = 8   
     {".---", 'J'},    // J Index = 9
     {"-.-", 'K'},     // K Index = 10
     {".-..", 'L'},    // L Index = 11
@@ -65,11 +64,9 @@ MorseMapping morse_table[] = {
     {".--.-.", '@'}   // @
 };
 
-
 char *englishToMorse(char);
 
 char morseToEnglish(char *);
-
 
 int main()
 {
@@ -89,17 +86,20 @@ int main()
         printf("Memory allocation failed!\n");
     }
 
-    printf("Enter 1 to convert English to Morse.\nEnter 2 to convert Morse to English.\n");
-    scanf("%d", &choice);
+    int num_chars = sizeof(morse_table) / sizeof(morse_table[0]);
 
-    printf("Enter text to convert: ");
-    getchar(); // consume newline character from scanf
-    fgets(input, 100, stdin);
-    input[strcspn(input, "\n")] = '\0';
+    printf("\t**** MORSE CODE TRANSLATOR ****\n\n");
+
+    printf("Enter 1 to convert English to Morse.\nEnter 2 to convert Morse to English.\nEnter 3 to display Morse Table\n");
+    scanf("%d", &choice);
 
     switch (choice)
     {
     case 1:
+        printf("Enter text to convert: ");
+        getchar(); // consume newline character from scanf
+        fgets(input, 100, stdin);
+        input[strcspn(input, "\n")] = '\0';
 
         // Convert each character to Morse code
         len = strlen(input);
@@ -116,6 +116,10 @@ int main()
         printf("\n");
 
     case 2:
+        printf("Enter morse code to convert: ");
+        getchar(); // consume newline character from scanf
+        fgets(input, 100, stdin);
+        input[strcspn(input, "\n")] = '\0';
 
         // Split the input into Morse code words and characters
         word = strtok(input, " ");
@@ -132,14 +136,24 @@ int main()
             word = strtok(NULL, " ");
         }
         printf("\n");
-
+         free(input);
+        free(word);
         return 0;
+    case 3:
+        
+        printf("**** MORSE TABLE ****\n\n");
+
+        for (int i = 0; i < num_chars; i++)
+        {
+            printf("%s  <--->  %c\n", morse_table[i].morse, morse_table[i].english);
+        }
 
     default:
+
         printf("Invalid choice!\n");
         break;
-        free(input);
-        free(word);
+        // free(input);
+        // free(word);
     }
 }
 
@@ -156,7 +170,6 @@ char *englishToMorse(char morse)
     }
 
     return 0;
-
 }
 
 char morseToEnglish(char *morsem)
