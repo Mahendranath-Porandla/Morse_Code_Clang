@@ -44,7 +44,7 @@ static char *morse_table[] = {
 
 char *englishToMorse(char);
 
-char morseToEnglish( char *);
+char morseToEnglish(char *);
 
 int main()
 {
@@ -58,28 +58,25 @@ int main()
         return 1;
     }
 
-    char c;
-
     char *word;
     word = (char *)malloc(sizeof(*word));
 
     printf("Enter 1 to convert English to Morse.\nEnter 2 to convert Morse to English.\n");
     scanf("%d", &choice);
-    
+
     printf("Enter text to convert: ");
     getchar(); // consume newline character from scanf
     fgets(input, 100, stdin);
-  //  input[strcspn(input, "\n")] = '\0'; // remove trailing newline character
 
     switch (choice)
     {
     case 1:
-        //englishToMorse(c);
+
         // Convert each character to Morse code
         len = strlen(input);
         for (int i = 0; i < len; i++)
         {
-             char *morse = englishToMorse(input[i]);
+            char *morse = englishToMorse(input[i]);
             printf("%s ", morse);
         }
         printf("\n");
@@ -98,13 +95,11 @@ int main()
             {
                 printf("%c", cm);
             }
-          
 
             // Move to the next word
             word = strtok(NULL, " ");
         }
         printf("\n");
-       
 
         return 0;
         break;
@@ -113,8 +108,8 @@ int main()
         printf("Invalid choice!\n");
         break;
     }
-     free(input);
-        free(word);
+    free(input);
+    free(word);
 
     return 0;
 }
@@ -179,7 +174,7 @@ char *englishToMorse(char c)
     }
 }
 
-char morseToEnglish( char *morsem)
+char morseToEnglish(char *morsem)
 {
     if (strcmp(morsem, "/") == 0)
     {
@@ -190,20 +185,18 @@ char morseToEnglish( char *morsem)
 
     for (int i = 0; i < num_chars; i++)
     {
-         if (strcmp(morsem, morse_table[i]) == 0)
+        if (strcmp(morsem, morse_table[i]) == 0)
         {
-        //     // Return the corresponding English character
-        //     return (char)'A' + i;
-        // }
-        if (i >= 0 && i <= 25) {
+            if (i >= 0 && i <= 25)
+            {
                 return (char)('A' + i);
-                //break;
-
-            } 
-            else if (i >= 26 && i <= 35) {
+                // break;
+            }
+            else if (i >= 26 && i <= 35)
+            {
                 return (char)('0' + i - 26);
             }
-    }
+        }
     }
 
     // No match found
