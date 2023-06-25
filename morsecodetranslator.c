@@ -1,50 +1,75 @@
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 
-static char *morse_table[] = {
-    ".-",    // A Index = 0
-    "-...",  // B Index = 1
-    "-.-.",  // C Index = 2
-    "-..",   // D Index = 3
-    ".",     // E Index = 4
-    "..-.",  // F Index = 5
-    "--.",   // G Index = 6
-    "....",  // H Index = 7
-    "..",    // I Index = 8
-    ".---",  // J Index = 9
-    "-.-",   // K Index = 10
-    ".-..",  // L Index = 11
-    "--",    // M Index = 12
-    "-.",    // N Index = 13
-    "---",   // O Index = 14
-    ".--.",  // P Index = 15
-    "--.-",  // Q Index = 16
-    ".-.",   // R Index = 17
-    "...",   // S Index = 18
-    "-",     // T Index = 19
-    "..-",   // U Index = 20
-    "...-",  // V Index = 21
-    ".--",   // W Index = 22
-    "-..-",  // X Index = 23
-    "-.--",  // Y Index = 24
-    "--..",  // Z Index = 25
-    "-----", // 0 Index = 26
-    ".----", // 1 Index = 27
-    "..---", // 2 Index = 28
-    "...--", // 3 Index = 29
-    "....-", // 4 Index = 30
-    ".....", // 5 Index = 31
-    "-....", // 6 Index = 32
-    "--...", // 7 Index = 33
-    "---..", // 8 Index = 34
-    "----.", // 9 Index = 35
+typedef struct
+{
+    char *morse;
+    char english;
+} MorseMapping;
 
+
+MorseMapping morse_table[] = {
+    {".-", 'A'},      // A Index = 0
+    {"-...", 'B'},    // B Index = 1
+    {"-.-.", 'C'},    // C Index = 2
+    {"-..", 'D'},     // D Index = 3
+    {".", 'E'},       // E Index = 4
+    {"..-.", 'F'},    // F Index = 5
+    {"--.", 'G'},     // G Index = 6
+    {"....", 'H'},    // H Index = 7
+    {"..", 'I'},      // I Index = 8
+    {".---", 'J'},    // J Index = 9
+    {"-.-", 'K'},     // K Index = 10
+    {".-..", 'L'},    // L Index = 11
+    {"--", 'M'},      // M Index = 12
+    {"-.", 'N'},      // N Index = 13
+    {"---", 'O'},     // O Index = 14
+    {".--.", 'P'},    // P Index = 15
+    {"--.-", 'Q'},    // Q Index = 16
+    {".-.", 'R'},     // R Index = 17
+    {"...", 'S'},     // S Index = 18
+    {"-", 'T'},       // T Index = 19
+    {"..-", 'U'},     // U Index = 20
+    {"...-", 'V'},    // V Index = 21
+    {".--", 'W'},     // W Index = 22
+    {"-..-", 'X'},    // X Index = 23
+    {"-.--", 'Y'},    // Y Index = 24
+    {"--..", 'Z'},    // Z Index = 25
+    {"-----", '0'},   // 0 Index = 26
+    {".----", '1'},   // 1 Index = 27
+    {"..---", '2'},   // 2 Index = 28
+    {"...--", '3'},   // 3 Index = 29
+    {"....-", '4'},   // 4 Index = 30
+    {".....", '5'},   // 5 Index = 31
+    {"-....", '6'},   // 6 Index = 32
+    {"--...", '7'},   // 7 Index = 33
+    {"---..", '8'},   // 8 Index = 34
+    {"----.", '9'},   // 9 Index = 35
+    {"/", ' '},       // Space
+    {".-.-.-", '.'},  // .
+    {"--..--", ','},  // ,
+    {"..--..", '?'},  // ?
+    {"-..-.", '/'},   // /
+    {"-.-.--", '!'},  // !
+    {"-.--.", '('},   // (
+    {"-.--.-", ')'},  // )
+    {".-...", '&'},   // &
+    {"---...", ':'},  // :
+    {"-.-.-.", ';'},  // ;
+    {"-...-", '='},   // =
+    {".-.-.", '+'},   // +
+    {"-....-", '-'},  // -
+    {"..--.-", '_'},  // _
+    {"...-..-", '$'}, // $
+    {".--.-.", '@'}   // @
 };
+
 
 char *englishToMorse(char);
 
 char morseToEnglish(char *);
+
 
 int main()
 {
@@ -55,11 +80,14 @@ int main()
     if (input == NULL)
     {
         printf("Memory allocation failed!\n");
-        return 1;
     }
 
     char *word;
     word = (char *)malloc(sizeof(*word));
+    if (word == NULL)
+    {
+        printf("Memory allocation failed!\n");
+    }
 
     printf("Enter 1 to convert English to Morse.\nEnter 2 to convert Morse to English.\n");
     scanf("%d", &choice);
@@ -84,6 +112,9 @@ int main()
 
         return 0;
         break;
+
+        printf("\n");
+
     case 2:
 
         // Split the input into Morse code words and characters
@@ -103,103 +134,42 @@ int main()
         printf("\n");
 
         return 0;
-        break;
 
     default:
         printf("Invalid choice!\n");
         break;
-    }
-    free(input);
-    free(word);
-
-    return 0;
-}
-
-char *englishToMorse(char c)
-{
-    if (c >= 'A' && c <= 'Z')
-    {
-        return morse_table[c - 'A'];
-    }
-    else if (c >= 'a' && c <= 'z')
-    {
-        return morse_table[c - 'a'];
-    }
-    else if (c >= '0' && c <= '9')
-    {
-        return morse_table[c - '0' + 26];
-    }
-    else
-    {
-        switch (c)
-        {
-        case ' ':
-            return "/";
-        case '.':
-            return ".-.-.-";
-        case ',':
-            return "--..--";
-        case '?':
-            return "..--..";
-        case '/':
-            return "-..-.";
-        case '!':
-            return "-.-.--";
-
-        case '(':
-            return "-.--.";
-        case ')':
-            return "-.--.-";
-        case '&':
-            return ".-...";
-        case ':':
-            return "---...";
-        case ';':
-            return "-.-.-.";
-        case '=':
-            return "-...-";
-        case '+':
-            return ".-.-.";
-        case '-':
-            return "-....-";
-        case '_':
-            return "..--.-";
-
-        case '$':
-            return "...-..-";
-        case '@':
-            return ".--.-.";
-        default:
-            return "";
-        }
+        free(input);
+        free(word);
     }
 }
 
-char morseToEnglish(char *morsem)
+char *englishToMorse(char morse)
 {
-    if (strcmp(morsem, "/") == 0)
-    {
-        return ' '; // Return space for "/"
-    }
-    // Search the Morse Code lookup table for a match
     int num_chars = sizeof(morse_table) / sizeof(morse_table[0]);
 
     for (int i = 0; i < num_chars; i++)
     {
-        if (strcmp(morsem, morse_table[i]) == 0)
+        if (morse_table[i].english == morse)
         {
-            if (i >= 0 && i <= 25)
-            {
-                return (char)('A' + i);
-                // break;
-            }
-            else if (i >= 26 && i <= 35)
-            {
-                return (char)('0' + i - 26);
-            }
+            return morse_table[i].morse;
         }
     }
 
-    // No match found
-    return '\0';
+    return 0;
+
+}
+
+char morseToEnglish(char *morsem)
+{
+    int num_chars = sizeof(morse_table) / sizeof(morse_table[0]);
+
+    for (int i = 0; i < num_chars; i++)
+    {
+        if (strcmp(morsem, morse_table[i].morse) == 0)
+        {
+            return morse_table[i].english;
+        }
+    }
+
+    return '\0'; // No match found
 }
