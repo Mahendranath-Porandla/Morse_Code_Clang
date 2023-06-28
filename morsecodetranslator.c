@@ -139,6 +139,7 @@ int main()
          free(input);
         free(word);
         return 0;
+        break;
     case 3:
         
         printf("**** MORSE TABLE ****\n\n");
@@ -147,13 +148,12 @@ int main()
         {
             printf("%s  <--->  %c\n", morse_table[i].morse, morse_table[i].english);
         }
+        break;
 
     default:
 
         printf("Invalid choice!\n");
         break;
-        // free(input);
-        // free(word);
     }
 }
 
