@@ -6,89 +6,87 @@ typedef struct
 {
     char *morse;
     char english;
-} MorseMapping;
+} morse_matching;
 
-MorseMapping *morse_table = NULL;
+morse_matching *morse_table = NULL;
+
 int num_chars = 0;
 
 void initializeMorseTable()
 {
-    const MorseMapping mappings[] = {
-        {".-", 'A'},      // A Index = 0
-        {"-...", 'B'},    // B Index = 1
-        {"-.-.", 'C'},    // C Index = 2
-        {"-..", 'D'},     // D Index = 3
-        {".", 'E'},       // E Index = 4
-        {"..-.", 'F'},    // F Index = 5
-        {"--.", 'G'},     // G Index = 6
-        {"....", 'H'},    // H Index = 7
-        {"..", 'I'},      // I Index = 8   
-        {".---", 'J'},    // J Index = 9
-        {"-.-", 'K'},     // K Index = 10
-        {".-..", 'L'},    // L Index = 11
-        {"--", 'M'},      // M Index = 12
-        {"-.", 'N'},      // N Index = 13
-        {"---", 'O'},     // O Index = 14
-        {".--.", 'P'},    // P Index = 15
-        {"--.-", 'Q'},    // Q Index = 16
-        {".-.", 'R'},     // R Index = 17
-        {"...", 'S'},     // S Index = 18
-        {"-", 'T'},       // T Index = 19
-        {"..-", 'U'},     // U Index = 20
-        {"...-", 'V'},    // V Index = 21
-        {".--", 'W'},     // W Index = 22
-        {"-..-", 'X'},    // X Index = 23
-        {"-.--", 'Y'},    // Y Index = 24
-        {"--..", 'Z'},    // Z Index = 25
-        {"-----", '0'},   // 0 Index = 26
-        {".----", '1'},   // 1 Index = 27
-        {"..---", '2'},   // 2 Index = 28
-        {"...--", '3'},   // 3 Index = 29
-        {"....-", '4'},   // 4 Index = 30
-        {".....", '5'},   // 5 Index = 31
-        {"-....", '6'},   // 6 Index = 32
-        {"--...", '7'},   // 7 Index = 33
-        {"---..", '8'},   // 8 Index = 34
-        {"----.", '9'},   // 9 Index = 35
-        {"/", ' '},       // Space
-        {".-.-.-", '.'},  // .
-        {"--..--", ','},  // ,
-        {"..--..", '?'},  // ?
-        {"-..-.", '/'},   // /
-        {"-.-.--", '!'},  // !
-        {"-.--.", '('},   // (
-        {"-.--.-", ')'},  // )
-        {".-...", '&'},   // &
-        {"---...", ':'},  // :
-        {"-.-.-.", ';'},  // ;
-        {"-...-", '='},   // =
-        {".-.-.", '+'},   // +
-        {"-....-", '-'},  // -
-        {"..--.-", '_'},  // _
-        {"...-..-", '$'}, // $
-        {".--.-.", '@'}   // @
-    };
+    const morse_matching matchings[] = {
+        {".-", 'A'},
+        {"-...", 'B'},
+        {"-.-.", 'C'},
+        {"-..", 'D'},
+        {".", 'E'},
+        {"..-.", 'F'},
+        {"--.", 'G'},
+        {"....", 'H'},
+        {"..", 'I'},
+        {".---", 'J'},
+        {"-.-", 'K'},
+        {".-..", 'L'},
+        {"--", 'M'},
+        {"-.", 'N'},
+        {"---", 'O'},
+        {".--.", 'P'},
+        {"--.-", 'Q'},
+        {".-.", 'R'},
+        {"...", 'S'},
+        {"-", 'T'},
+        {"..-", 'U'},
+        {"...-", 'V'},
+        {".--", 'W'},
+        {"-..-", 'X'},
+        {"-.--", 'Y'},
+        {"--..", 'Z'},
+        {"-----", '0'},
+        {".----", '1'},
+        {"..---", '2'},
+        {"...--", '3'},
+        {"....-", '4'},
+        {".....", '5'},
+        {"-....", '6'},
+        {"--...", '7'},
+        {"---..", '8'},
+        {"----.", '9'},
+        {"/", ' '},
+        {".-.-.-", '.'},
+        {"--..--", ','},
+        {"..--..", '?'},
+        {"-..-.", '/'},
+        {"-.-.--", '!'},
+        {"-.--.", '('},
+        {"-.--.-", ')'},
+        {".-...", '&'},
+        {"---...", ':'},
+        {"-.-.-.", ';'},
+        {"-...-", '='},
+        {".-.-.", '+'},
+        {"-....-", '-'},
+        {"..--.-", '_'},
+        {"...-..-", '$'},
+        {".--.-.", '@'}};
 
-    num_chars = sizeof(mappings) / sizeof(mappings[0]);
+    num_chars = sizeof(matchings) / sizeof(matchings[0]);
 
     // declaring morse table dynamically
-    morse_table = (MorseMapping *)malloc(num_chars * sizeof(MorseMapping));
+    morse_table = (morse_matching *)malloc(num_chars * sizeof(morse_matching));
 
     // copying data into morse table
     for (int i = 0; i < num_chars; i++)
     {
-        morse_table[i].morse = strdup(mappings[i].morse);
-        morse_table[i].english = mappings[i].english;
+        morse_table[i].morse = strdup(matchings[i].morse);
+        morse_table[i].english = matchings[i].english;
     }
 }
 
-
-
-char *englishToMorse(char morse)
+char *englishToMorse(char text)
 {
     for (int i = 0; i < num_chars; i++)
     {
-        if (morse_table[i].english == morse)
+        if (morse_table[i].english == text)
         {
             return morse_table[i].morse;
         }
@@ -97,11 +95,11 @@ char *englishToMorse(char morse)
     return NULL; // No match found
 }
 
-char morseToEnglish(char *morsem)
+char morseToEnglish(char *morse)
 {
     for (int i = 0; i < num_chars; i++)
     {
-        if (strcmp(morsem, morse_table[i].morse) == 0)
+        if (strcmp(morse, morse_table[i].morse) == 0)
         {
             return morse_table[i].english;
         }
@@ -141,11 +139,13 @@ int main()
     printf("Enter 1 to convert English to Morse.\n"
            "Enter 2 to convert Morse to English.\n"
            "Enter 3 to display Morse Table.\n");
+
     scanf("%d", &choice);
 
     switch (choice)
     {
     case 1:
+
         printf("Enter text to convert: ");
         getchar(); // consume newline(\n) character from scanf
         fgets(input, 1000, stdin);
@@ -166,12 +166,13 @@ int main()
         break;
 
     case 2:
+
         printf("Enter morse code to convert: ");
         getchar(); // consume newline(\n) character from scanf
         fgets(input, 1000, stdin);
         input[strcspn(input, "\n")] = '\0';
 
-        // splitting the input 
+        // splitting the input
         word = strtok(input, " ");
         while (word != NULL)
         {
@@ -190,6 +191,7 @@ int main()
         break;
 
     case 3:
+
         printf("**** MORSE TABLE ****\n\n");
 
         for (int i = 0; i < num_chars; i++)
@@ -199,12 +201,16 @@ int main()
         break;
 
     default:
+
         printf("Invalid choice!\n");
         break;
     }
 
     free(input);
+
     free(word);
-free(morse_table);
+
+    free(morse_table);
+
     return 0;
 }
