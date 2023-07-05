@@ -73,7 +73,7 @@ int main()
     int choice;
     char *input;
     int len;
-    input = (char *)malloc(100 * sizeof(*input));
+    input = (char *)malloc(1000 * sizeof(*input));
     if (input == NULL)
     {
         printf("Memory allocation failed!\n");
@@ -90,7 +90,7 @@ int main()
 
     printf("\t**** MORSE CODE TRANSLATOR ****\n\n");
 
-    printf("Enter 1 to convert English to Morse.\nEnter 2 to convert Morse to English.\nEnter 3 to display Morse Table\n");
+    printf("Enter 1 to convert English to Morse.\nEnter 2 to convert Morse to English.\nEnter 3 to display Morse Table.\n");
     scanf("%d", &choice);
 
     switch (choice)
@@ -98,7 +98,7 @@ int main()
     case 1:
         printf("Enter text to convert: ");
         getchar(); // consume newline character from scanf
-        fgets(input, 100, stdin);
+        fgets(input, 1000, stdin);
         input[strcspn(input, "\n")] = '\0';
 
         // Convert each character to Morse code
@@ -118,7 +118,7 @@ int main()
     case 2:
         printf("Enter morse code to convert: ");
         getchar(); // consume newline character from scanf
-        fgets(input, 100, stdin);
+        fgets(input, 1000, stdin);
         input[strcspn(input, "\n")] = '\0';
 
         // Split the input into Morse code words and characters
